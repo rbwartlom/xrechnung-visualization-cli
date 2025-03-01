@@ -2,13 +2,14 @@
 
 set -eou pipefail
 
-invoice_path=${1:-}
-output_path=${2:-}
-
-if [[ "$invoice_path" == "-h" || "$invoice_path" == "--help" || -z "$invoice_path" || -z "$output_path" ]]; then
+if [[ "$#" -ne 2 ]]; then # also catches -h and --help
     echo "Usage: $0 <invoice_path> <output_path>"
     exit 0
 fi
+
+invoice_path=${1:-}
+output_path=${2:-}
+
 
 
 # make the output path absolute
@@ -62,8 +63,12 @@ declare -a expression=(
     "s|{{xr_xsl}}|$xr_xsl|g"
 )
 
+# without these lines, there would be a compatibility issue between mac and linux
+sed_flag=(-i)
+[[ "$OSTYPE" == "darwin"* ]] && sed_flag=(-i '')
+
 for expr in "${expression[@]}"; do
-    sed -i '' -e "$expr" "$workdir/build.xml"
+    sed "${sed_flag[@]}" -e "$expr" "$workdir/build.xml"
 done
 
 cd "$workdir" && ant transform-xr-to-pdf

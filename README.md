@@ -4,11 +4,27 @@ A lightweight command line interface for using the [xrechnung-visualization](htt
 ## Usage
 When cloning this repository, make sure to clone with the `--recurse-submodules` flag to get the submodule as well.
 
-The `index.sh` script is the entry point for the CLI. It provides the following arguments
-- positional arguments
-  - `input` - the path to the input file
-  - `output` - the path to the output file
-That's it, the script should take care of the rest!
+### CLI Arguments
+- _`<docker_tag>` (docker mode only): The tag of the docker image to use._
+- `<input_invoice_path>`: The path to the input invoice file.
+- `<output_pdf_path>`: The path where the output PDF will be saved.
+
+### Running on your own machine
+The `index.sh` script is the entry point for the CLI.
+```bash
+./index.sh <input_invoice_path> <output_pdf_path>
+```
+
+### Running with Docker
+1. Build the Docker image
+    ```bash
+    docker build -t <docker_tag> .
+    ```
+2. The `docker_runscript.sh` script is the entry point for the CLI.
+    ```bash
+    ./docker_runscript.sh <docker_tag> <input_invoice_path> <output_pdf_path>
+    ```
+
 
 ## Repo Structure
 - `index.sh` - The Script that the is CLI
