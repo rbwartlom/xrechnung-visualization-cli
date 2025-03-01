@@ -2,14 +2,17 @@
 
 set -eou pipefail
 
-invoice_path=$1
+invoice_path=${1:-}
+output_path=${2:-}
 
-output_path=$2
+if [[ "$invoice_path" == "-h" || "$invoice_path" == "--help" || -z "$invoice_path" || -z "$output_path" ]]; then
+    echo "Usage: $0 <invoice_path> <output_path>"
+    exit 0
+fi
+
 
 # make the output path absolute
-if [ "$output_path" != "null" ]; then   
-    output_path="$(pwd)/$output_path"
-fi
+output_path="$(pwd)/$output_path"
 
 # path definitions for the script
 script_dir="$(realpath "$(dirname "$0")")"
