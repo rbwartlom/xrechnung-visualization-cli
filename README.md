@@ -31,7 +31,8 @@ This is faster, but there might be unforeseen dependency issues.
 
 
 ## Repo Structure
-- `index.sh` - The Script that the is CLI
+- `index.sh` - The Core CLI script
+- `docker_runscript.sh` - A Wrapper around the CLI script that runs the script in a Docker container
+- `Dockerfile` - Creates a Docker image with the necessary dependencies
 - `xrechnung-visualization` - The xrechnung-visualization library as a submodule
 - `build_template.xml` - The template for the build file, [source](https://github.com/DAtek/xrechnung-visualization-issues/blob/master/src/build_template.xml)
-- `README.md` - This file
