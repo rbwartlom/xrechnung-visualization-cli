@@ -1,5 +1,7 @@
 # XRechnung CLI
-A lightweight command line interface for using the [xrechnung-visualization](https://github.com/itplr-kosit/xrechnung-visualization) library.
+A lightweight command line interface for using the [xrechnung-visualization](https://github.com/itplr-kosit/xrechnung-visualization) library. 
+
+Built because just running the repo is unnecessarily complex. Also, a lot of the existing software ran on one specific programming langage (like PHP), which is obviously a pain to use if you're using anything else (e.g. Python or Typescript) and want to integrate in your project. This is why this small codebase is Dockerized and only uses bash beyond the requirements from `xrechnung-visualization`
 
 ## Usage
 When cloning this repository, make sure to clone with the `--recurse-submodules` flag to get the submodule as well.
@@ -10,10 +12,12 @@ When cloning this repository, make sure to clone with the `--recurse-submodules`
 - `<output_pdf_path>`: The path where the output PDF will be saved.
 
 ### Running on your own machine
-The `index.sh` script is the entry point for the CLI.
-```bash
-./index.sh <input_invoice_path> <output_pdf_path>
-```
+This is faster, but there might be unforeseen dependency issues.
+1. Make sure you have a JRE, `ant` and `xsltproc` installed
+2. The `index.sh` script is the entry point for the CLI.
+  ```bash
+  ./index.sh <input_invoice_path> <output_pdf_path>
+  ```
 
 ### Running with Docker
 1. Build the Docker image

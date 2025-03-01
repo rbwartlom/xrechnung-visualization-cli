@@ -8,13 +8,11 @@ fi
 # Get the absolute paths for input and output
 docker_tag=$1
 input_path=$(realpath "$2")
-output_dir=$(dirname "$(realpath "$2")")
+output_path=$(realpath "$(dirname "$3")")/$(basename "$3")
 
-
-# Run the Docker container
 docker run --rm \
     -v "$(dirname "$input_path"):/invoices" \
-    -v "$output_dir:/output" \
+    -v "$(dirname "$output_path"):/app/output" \
     "$docker_tag" \
     "/invoices/$(basename "$input_path")" \
-    "/output/$output_file"
+    "/output/$(basename "$output_path")"
