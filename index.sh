@@ -11,9 +11,10 @@ invoice_path=${1:-}
 output_path=${2:-}
 
 
-
 # make the output path absolute
-output_path="$(pwd)/$output_path"
+if [[ ! "$output_path" =~ ^/ ]]; then
+    output_path="$(pwd)/$output_path"
+fi
 
 # path definitions for the script
 script_dir="$(realpath "$(dirname "$0")")"
